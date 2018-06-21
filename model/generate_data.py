@@ -122,7 +122,7 @@ def coords_distance(lat1, lng1, lat2, lng2):
     r = requests.get(url)
     print (r.url)
     data = r.json()
-    distance = data["rows"][0]["elements"][0]["distance"]["text"][:3]
+    distance = data["rows"][0]["elements"][0]["distance"]["value"]
     print (distance)
 
     return distance

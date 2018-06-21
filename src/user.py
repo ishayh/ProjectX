@@ -18,7 +18,6 @@ class User:
     def process_user_setting(self):
         print ("in process_user_setting: start loc is " + str(self.start_loc[0]) + str(self.start_loc[1]))
         location = Location(self.start_loc[0], self.start_loc[1])
-        fig = plt.figure()
         ax = host_subplot(111, axes_class=Axes)
 
         ax.set_autoscale_on(True)
@@ -28,10 +27,9 @@ class User:
 
         location = Location(latitude1, longitude1)
 
-        for i in range(1, 2):
-            x, y, dist = location.find_hottest_point()
-            print("in for loop = " + str(x), str(y), str(dist))
-            ax.plot(x, y, 'bo')
+        x, y = location.find_hottest_route()
+        print("after find_hottest_route= " + str(x), str(y))
+        ax.plot(x, y, 'bo')
         plt.show()
         return x, y
 
