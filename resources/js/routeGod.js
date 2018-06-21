@@ -7,13 +7,9 @@ $('#submit').click(function() {
 
 GreenPath.calculateRoute = () => {
     let userSettings = {}
-    // userSettings.startLocation = JSON.parse($('#start').val());
-    // userSettings.endLocation = JSON.parse($('#end').val());
-    // userSettings.distance = parseInt($('#range').val());
-
-    userSettings.startLocation = [40.7829, -73.9654];
-    // userSettings.endLocation = [40.7829, -73.9654];
-    userSettings.distance = 15;
+    let userPosition = JSON.parse($('#start').val())
+    userSettings.startLocation = [userPosition["lat"], userPosition["lng"]];
+    userSettings.distance = parseInt($('#range').val());
     
     $.post("/newroute", { "userPreferences": JSON.stringify(userSettings) }, function (result) {
         if (result["STATUS"] != "SUCCESS") {
@@ -35,6 +31,7 @@ GreenPath.calculateRoute = () => {
 // **************** Map Route Display *******************
 
 GreenPath.updateRouteParameters = (waypointArray) => {
+    GreenPath.waypts = [];
     for (let i in waypointArray) {
         console.log(typeof waypointArray[i].latitude, waypointArray[i].longitude);
         GreenPath.waypts.push({
